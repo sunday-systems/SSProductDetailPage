@@ -1,0 +1,60 @@
+Plugin\SSProductDetailPage\Entity\ProductDetailLayout: 
+    type: entity
+    table: plg_ss_product_detail_layout
+    repositoryClass: Plugin\SSProductDetailPage\Repository\ProductDetailLayoutRepository
+    id:
+        page_id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+        device_type_id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+    fields:
+        name:
+            type: text
+            nullable: true
+            column: page_name
+        edit_flg:
+            type: smallint
+            nullable: true
+            unsigned: false
+            options:
+                default: '1'
+        author:
+            type: text
+            nullable: true
+        description:
+            type: text
+            nullable: true
+        keyword:
+            type: text
+            nullable: true
+        update_url:
+            type: text
+            nullable: true
+        create_date:
+            type: datetime
+            nullable: false
+        update_date:
+            type: datetime
+            nullable: false
+        meta_robots:
+            type: text
+            nullable: true
+    oneToMany:
+        ProductDetailBlockPositions:
+            targetEntity: Plugin\SSProductDetailPage\Entity\ProductDetailBlockPosition
+            cascade: ["persist", "remove"]
+            mappedBy: ProductDetailLayout
+            indexBy: block_id
+    manyToOne:
+        DeviceType:
+            targetEntity: Eccube\Entity\Master\DeviceType
+            joinColumn:
+                name: device_type_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

@@ -1,0 +1,11 @@
+name: 商品詳細ページレイアウト
+#event: SSProductDetailPage
+code: SSProductDetailPage
+
+version: 1.0.0
+
+service: 
+    - SSProductDetailPageProvider
+
+orm.path:
+    - /Resource/doctrine

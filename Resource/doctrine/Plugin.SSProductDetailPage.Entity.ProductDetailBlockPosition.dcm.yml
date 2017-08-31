@@ -1,0 +1,47 @@
+Plugin\SSProductDetailPage\Entity\ProductDetailBlockPosition: 
+    type: entity
+    table: plg_ss_product_detail_block_position
+    repositoryClass: Plugin\SSProductDetailPage\Repository\ProductDetailBlockPositionRepository
+    id:
+        page_id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+        target_id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+        block_id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+    fields:
+        block_row:
+            type: integer
+            nullable: true
+            unsigned: false
+        anywhere:
+            type: smallint
+            nullable: false
+            unsigned: false
+            options:
+                default: '0'
+    manyToOne:
+        Block:
+            targetEntity: Plugin\SSProductDetailPage\Entity\Block
+            inversedBy: ProductDetailBlockPositions
+            joinColumn:
+                name: block_id
+                referencedColumnName: block_id
+                nullable: false
+        ProductDetailLayout:
+            targetEntity: Plugin\SSProductDetailPage\Entity\ProductDetailLayout
+            inversedBy: ProductDetailBlockPositions
+            joinColumn:
+                name: page_id
+                referencedColumnName: page_id
+                nullable: false
+    lifecycleCallbacks: {  }
