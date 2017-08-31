@@ -159,7 +159,7 @@ class LayoutController extends AbstractController
         $em->getConnection()->commit();
         
         $app->addSuccess('レイアウト情報を削除しました。', 'admin');
-        return $app->redirect($app->url('admin_product_category_show', ['parent_id' => $id]));
+        return $app->redirect($app->url('admin_product_product_edit', ['id' => $id]));
     }
     
     public function preview(Application $app, Request $request, $id)

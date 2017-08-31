@@ -17,26 +17,26 @@ class SSProductDetailPage {
         $this->app = $app;
     }
     
-    public function onRenderTplAdminProductCategory(TemplateEvent $event)
+    public function onRenderTplAdminProductDetail(TemplateEvent $event)
     {
         
         $data = $event->getParameters();
         
         $data['IsExPageLayout'] = false;
-        if ($data['Parent']) {
+        if ($data['Product'] && $data['Product']->getId()) {
             /* @var $em \Doctrine\ORM\EntityManager */
             $em = $this->app['orm.em'];
-            $pageId = $em->getConnection()->fetchAll("SELECT page_id FROM plg_ss_product_list_layout WHERE page_id = ? AND device_type_id = 10", array($data['Parent']->getId()));
+            $pageId = $em->getConnection()->fetchAll("SELECT page_id FROM plg_ss_product_detail_layout WHERE page_id = ? AND device_type_id = 10", array($data['Product']->getId()));
             if (count($pageId)) {
                 $data['IsExPageLayout'] = true;
             }
         }
         
-        $oldMethod = '<div class="extra-form">';
+        $oldMethod = '{% if Product.id %}';
         $source = str_replace($oldMethod, 
-            $oldMethod . '{% if Parent %}
-                <a class="btn btn-default btn-sm" href="{{ url(\'ss_admin_product_list_layout_edit\', {id: Parent.id}) }}">独自レイアウト</a>
-                {% if IsExPageLayout %}<a class="btn btn-default btn-sm" href="{{ url(\'ss_admin_product_list_layout_delete\', {id: Parent.id}) }}" {{ csrf_token_for_anchor() }} data-method="delete" data-message="このレイアウトを削除してもよろしいですか？">レイアウト削除</a>{% endif %}
+            $oldMethod . '{% if Product.Id %}
+                <a class="btn btn-default btn-sm" href="{{ url(\'ss_admin_product_detail_layout_edit\', {id: Product.id}) }}">独自レイアウト</a>
+                {% if IsExPageLayout %}<a class="btn btn-default btn-sm" href="{{ url(\'ss_admin_product_detail_layout_delete\', {id: Product.id}) }}" {{ csrf_token_for_anchor() }} data-method="delete" data-message="このレイアウトを削除してもよろしいですか？">レイアウト削除</a>{% endif %}
             {% endif %}', 
             $event->getSource());
         

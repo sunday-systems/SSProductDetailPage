@@ -1,0 +1,3 @@
+# TPLを修正
+Admin/Product/product.twig:
+    - [onRenderTplAdminProductDetail, NORMAL]
