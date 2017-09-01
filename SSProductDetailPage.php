@@ -44,45 +44,42 @@ class SSProductDetailPage {
         $event->setSource($source);
     }
     
-    public function onFrontProductIndexInit(EventArgs $event)
+    public function onFrontProductDetailInit(EventArgs $event)
     {
-        /* @var $form \Symfony\Component\Form\FormBuilder */
+        /* @var $product \Eccube\Entity\Product */
+        $product = $event->getArgument('Product');
         
-        
-        if (array_key_exists('category_id', $_REQUEST)) {
-            $cid = intval($_REQUEST['category_id']);
+        if ($product) {
+            $pid = $product->getId();
             
             try {
                 $DeviceType = $this->app['eccube.repository.master.device_type']
                     ->find(\Eccube\Entity\Master\DeviceType::DEVICE_TYPE_PC);
                 
                 /* @var $oldPageLayout \Eccube\Entity\PageLayout */
-                /* @var $PageLayout \Plugin\SSProductListPage\Entity\ProductListLayout */
+                /* @var $PageLayout \Plugin\SSProductDetailPage\Entity\ProductDetailLayout */
                 $oldPageLayout = null;
                     
                 $data = $this->app['twig']->getGlobals();
                 if (array_key_exists('PageLayout', $data)) {
                     $oldPageLayout = $data['PageLayout'];
                 }
-                /*
-                $PageLayout = $this->app['eccube.repository.page_layout']->getByUrl($DeviceType, 'product_list', 'product_list');
-                */
-                
+
                 if (array_key_exists('preview', $_REQUEST)) {
-                    $cid = 0;
+                    $pid = 0;
                 }
                 
-                $PageLayout = $this->app['plugin.ss_product_list.repository.page_layout']->get($DeviceType, $cid);
+                $PageLayout = $this->app['plugin.ss_product_detail.repository.page_layout']->get($DeviceType, $pid);
+                
                 if ($PageLayout) {
                     if ($oldPageLayout) {
                         $PageLayout->setAuthor($oldPageLayout->getAuthor());
                         $PageLayout->setDescription($oldPageLayout->getDescription());
                         $PageLayout->setKeyword($oldPageLayout->getKeyword());
                         $PageLayout->setMetaRobots($oldPageLayout->getMetaRobots());
-                        if (function_exists($oldPageLayout, 'getMetaTags')) {
+                        if (method_exists($oldPageLayout, 'getMetaTags')) {
                             $PageLayout->setMetaTags($oldPageLayout->getMetaTags());
-                        }
-                        
+                        }   
                     }
                     
                     $this->app['twig']->addGlobal('PageLayout', $PageLayout);

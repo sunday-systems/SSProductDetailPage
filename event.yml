@@ -1,3 +1,6 @@
 # TPLを修正
 Admin/Product/product.twig:
     - [onRenderTplAdminProductDetail, NORMAL]
+    
+front.product.detail.initialize:
+    - [onFrontProductDetailInit, NORMAL]
