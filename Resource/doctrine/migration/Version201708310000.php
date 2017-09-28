@@ -64,7 +64,7 @@ class Version201708310000 extends AbstractMigration
             'notnull' => false,
         ));
         
-        $table->setPrimaryKey(array('page_id', 'device_type_id'));
+        $table->setPrimaryKey(array('page_id'));
         
         $table = $schema->createTable('plg_ss_product_detail_block_position');
         
