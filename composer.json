@@ -1,0 +1,14 @@
+{
+  "name": "ec-cube/SSProductDetailPage",
+  "version": "0.0.1",
+  "description": "",
+  "type": "eccube-plugin",
+  "require":
+  {
+    "ec-cube/plugin-installer": "~0.0.6"
+  },
+  "extra":
+  {
+    "code": "SSProductDetailPage"
+  }
+}

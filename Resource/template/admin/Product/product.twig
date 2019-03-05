@@ -1,0 +1,38 @@
+{% if Product.id %}
+
+    <script>
+        $(function () {
+            $('#product_pc').appendTo($('#basicConfig .card-body'));
+            $('#product_mobile').appendTo($('#basicConfig .card-body'));
+            $('#product_layout_template').remove();
+        });
+    </script>
+
+    <div id="product_layout_template" style="display: none;">
+
+        <div class="row" id="product_pc">
+            <div class="col-3">
+                <div class="d-inline-block">
+                    <span>{{ 'product_layout.admin.product_pc.title'|trans }}</span>
+                </div>
+            </div>
+            <div class="col mb-2">
+                {{ form_widget(form.PcLayout) }}
+                {{ form_errors(form.PcLayout) }}
+            </div>
+        </div>
+
+        <div class="row" id="product_mobile">
+            <div class="col-3">
+                <div class="d-inline-block">
+                    <span>{{ 'product_layout.admin.product_mobile.title'|trans }}</span>
+                </div>
+            </div>
+            <div class="col mb-2">
+                {{ form_widget(form.SpLayout) }}
+                {{ form_errors(form.SpLayout) }}
+            </div>
+        </div>
+    </div>
+
+{% endif %}
