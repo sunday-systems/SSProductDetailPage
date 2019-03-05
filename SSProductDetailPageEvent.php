@@ -113,15 +113,7 @@ class SSProductDetailPageEvent implements EventSubscriberInterface
      */
     public function onAdminProductDeleteComplete(EventArgs $eventArgs)
     {
-        /** @var Product $Product */
-        $Product = $eventArgs->getArgument('Product');
 
-        /** @var ProductLayout $productLayout */
-        foreach ($Product->getProductLayouts() as $productLayout) {
-            $Product->removeProductLayout($productLayout);
-            $this->entityManager->remove($productLayout);
-            $this->entityManager->flush($productLayout);
-        }
     }
 
     /**
