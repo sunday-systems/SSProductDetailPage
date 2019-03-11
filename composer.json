@@ -1,7 +1,7 @@
 {
   "name": "ec-cube/SSProductDetailPage",
   "version": "0.0.1",
-  "description": "",
+  "description": "商品詳細ページレイアウトプラグイン",
   "type": "eccube-plugin",
   "require":
   {
