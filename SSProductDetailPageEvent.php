@@ -2,7 +2,7 @@
 
 namespace Plugin\SSProductDetailPage;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Eccube\Entity\Layout;
 use Eccube\Entity\Product;
 use Eccube\Event\EccubeEvents;
@@ -15,7 +15,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class SSProductDetailPageEvent implements EventSubscriberInterface
 {
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     protected $entityManager;
 
@@ -24,7 +24,7 @@ class SSProductDetailPageEvent implements EventSubscriberInterface
      */
     protected $productLayoutRepository;
 
-    public function __construct(EntityManager $entityManager, ProductLayoutRepository $productLayoutRepository)
+    public function __construct(EntityManagerInterface $entityManager, ProductLayoutRepository $productLayoutRepository)
     {
         $this->entityManager = $entityManager;
         $this->productLayoutRepository = $productLayoutRepository;

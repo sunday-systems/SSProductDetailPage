@@ -13,9 +13,9 @@
 
 namespace Plugin\SSProductDetailPage\Repository;
 
+use Doctrine\Persistence\ManagerRegistry;
 use Eccube\Repository\AbstractRepository;
 use Plugin\SSProductDetailPage\Entity\ProductLayout;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * ProductLayoutRepository
@@ -28,9 +28,9 @@ class ProductLayoutRepository extends AbstractRepository
     /**
      * ProductLayoutRepository c`onstructor.
      *
-     * @param RegistryInterface $registry
+     * @param ManagerRegistry $registry
      */
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, ProductLayout::class);
     }

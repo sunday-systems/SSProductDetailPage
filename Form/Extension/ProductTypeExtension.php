@@ -90,4 +90,14 @@ class ProductTypeExtension extends AbstractTypeExtension
     {
         return ProductType::class;
     }
+
+    /**
+     * product admin form name.
+     *
+     * @return string[]
+     */
+    public static function getExtendedTypes(): iterable
+    {
+        yield ProductType::class;
+    }
 }

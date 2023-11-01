@@ -2,13 +2,13 @@
 
 namespace Plugin\SSProductDetailPage;
 
+use Detection\MobileDetect;
 use Eccube\Entity\Master\DeviceType;
 use Eccube\Entity\Product;
 use Eccube\Repository\LayoutRepository;
 use Eccube\Request\Context;
 use Plugin\SSProductDetailPage\Entity\ProductLayout;
-use SunCat\MobileDetectBundle\DeviceDetector\MobileDetector;
-use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Twig\Environment;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -33,7 +33,7 @@ class TemplateLayoutListener implements EventSubscriberInterface
     protected $twig;
 
     /**
-     * @var MobileDetector
+     * @var MobileDetect
      */
     protected $mobileDetector;
 
@@ -42,7 +42,7 @@ class TemplateLayoutListener implements EventSubscriberInterface
      */
     protected $layoutRepository;
 
-    public function __construct(Environment $twig, Context $requestContext, MobileDetector $mobileDetector, LayoutRepository $layoutRepository)
+    public function __construct(Environment $twig, Context $requestContext, MobileDetect $mobileDetector, LayoutRepository $layoutRepository)
     {
         $this->requestContext = $requestContext;
         $this->twig = $twig;
@@ -50,7 +50,7 @@ class TemplateLayoutListener implements EventSubscriberInterface
         $this->layoutRepository = $layoutRepository;
     }
 
-    public function onKernelView(GetResponseForControllerResultEvent $event)
+    public function onKernelView(ViewEvent $event)
     {
 
         if ($this->initialized) {
